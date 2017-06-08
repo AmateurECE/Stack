@@ -31,7 +31,9 @@
  * LOCAL PROTOTYPES
  ***/
 
+#ifdef CONFIG_DEBUG_STACK
 static inline void error_exit(char *);
+#endif /* CONFIG_DEBUG_STACK */
 
 /*******************************************************************************
  * API FUNCTIONS
@@ -78,6 +80,7 @@ int stack_peek(Stack * stack, void ** pData)
     return -1;
 
   *pData = stack->stack[stack->head - 1];
+  return 0;
 }
 
 /*******************************************************************************
@@ -100,6 +103,7 @@ int stack_push(Stack * stack, void * data)
   stack->stack[stack->head] = (void *)data;
   stack->head++;
   stack->size++;
+  return 0;
 }
 
 /*******************************************************************************
@@ -122,6 +126,7 @@ int stack_pop(Stack * stack, void ** data)
   stack->head--;
   *data = stack->stack[stack->head];
   stack->size--;
+  return 0;
 }
 
 /*******************************************************************************
