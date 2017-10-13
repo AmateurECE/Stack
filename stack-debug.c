@@ -34,15 +34,13 @@ static inline void error_exit(char *);
 int main(int argc, char * argv[])
 {
   int * pNum;
-  stack_t * stack = malloc(sizeof(stack_t));
 
+  /* Initialize the stack with size 10 */
+  stack_t * stack = stack_create(10, free);
   if (stack == NULL)
-    error_exit("Could not allocate memory for stack!");
+    error_exit("Initializing stack was unsuccessful.");
 
   srand((unsigned)time(NULL));
-
-  /* Initialize the stack with size 10 and destroy = stdlib::free() */
-  stack_init(stack, free, 10);
 
   /* Fill the stack */
   printf("==== Inserting ====\n");
@@ -80,9 +78,7 @@ int main(int argc, char * argv[])
   if (stack_isempty(stack))
     assert(stack_pop(stack, (void **)&pNum) == -1);
 
-  stack_dest(stack);
-  free(stack);
-
+  stack_destroy(&stack);
   return 0;
 }
 

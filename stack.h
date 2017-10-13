@@ -40,11 +40,11 @@ typedef struct {
  * API FUNCTION PROTOTYPES
  ***/
 
-extern void stack_init(stack_t *, void (*)(void *), int);
+extern stack_t * stack_create(int, void (*)(void *));
 extern int stack_peek(stack_t *, void **);
 extern int stack_push(stack_t *, void *);
 extern int stack_pop(stack_t *, void **);
-extern void stack_dest(stack_t *);
+extern void stack_destroy(stack_t **);
 
 #endif /* __ET_STACK_H__ */
 

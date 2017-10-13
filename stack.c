@@ -27,26 +27,40 @@
  ***/
 
 /*******************************************************************************
- * FUNCTION:	    stack_init
+ * FUNCTION:	    stack_create
  *
- * DESCRIPTION:	    Initializes the stack to the size specified in 'size.'
+ * DESCRIPTION:	    Initializes a stack_t with the given information and returns
+ *		    a pointer to it.
  *
- * ARGUMENTS:	    stack: (stack_t *) -- the stack to be operated on.
+ * ARGUMENTS:	    size: int -- the size of the stack.
  *		    destroy: (void (*)(void *)) -- pointer to a user-defined
  *			     function that frees memory held within the stack.
- *		    size: int -- the size of the stack.
  *
- * RETURN:	    void.
+ * RETURN:	    stack_t * -- or NULL, if unsuccessful.
  *
  * NOTES:	    O(1)
  ***/
-void stack_init(stack_t * stack, void (*destroy)(void * data), int size)
+stack_t * stack_create(int size, void (*destroy)(void *))
 {
-  stack->destroy = destroy;
-  stack->size = 0;
-  stack->capacity = size;
-  stack->head = 0;
-  stack->stack = (void *)calloc(size, sizeof(void *));
+  if (size == 0)
+    return NULL;
+
+  stack_t * stack = malloc(sizeof(stack_t));
+  if (stack == NULL)
+    return NULL;
+
+  *stack = (stack_t){
+    .destroy = destroy,
+    .size = 0,
+    .capacity = size,
+    .head = 0,
+    .stack = calloc(size, sizeof(void *))
+  };
+
+  if (stack->stack == NULL)
+    return NULL;
+
+  return stack;
 }
 
 /*******************************************************************************
@@ -117,7 +131,7 @@ int stack_pop(stack_t * stack, void ** data)
 }
 
 /*******************************************************************************
- * FUNCTION:	    stack_dest
+ * FUNCTION:	    stack_destroy
  *
  * DESCRIPTION:	    Removes all data in the stack, and sets all bytes of memory
  *		    to 0. If destroy is set to NULL, does not free the memory
@@ -129,16 +143,17 @@ int stack_pop(stack_t * stack, void ** data)
  *
  * NOTES:	    O(n)
  ***/
-void stack_dest(stack_t * stack)
+void stack_destroy(stack_t ** stack)
 {
   void * data;
-  while (!stack_isempty(stack)) {
-    stack_pop(stack, &data);
-    stack->destroy(data);
+  while (!stack_isempty(*stack)) {
+    stack_pop(*stack, &data);
+    (*stack)->destroy(data);
   }
 
-  free(stack->stack);
-  memset(stack, 0, sizeof(stack_t));
+  free((*stack)->stack);
+  free(*stack);
+  *stack = NULL;
 }
 
 /******************************************************************************/
