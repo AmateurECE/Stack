@@ -77,7 +77,7 @@ stack_t * stack_create(int size, void (*destroy)(void *))
  ***/
 int stack_peek(stack_t * stack, void ** pData)
 {
-  if (stack_isempty(stack))
+  if (stack == NULL || pData == NULL || stack_isempty(stack))
     return -1;
 
   *pData = stack->stack[stack->head - 1];
@@ -98,7 +98,7 @@ int stack_peek(stack_t * stack, void ** pData)
  ***/
 int stack_push(stack_t * stack, void * data)
 {
-  if (stack_isfull(stack))
+  if (stack == NULL || data == NULL || stack_isfull(stack))
     return -1;
 
   stack->stack[stack->head] = (void *)data;
@@ -121,7 +121,7 @@ int stack_push(stack_t * stack, void * data)
  ***/
 int stack_pop(stack_t * stack, void ** data)
 {
-  if (stack_isempty(stack))
+  if (stack == NULL || data == NULL || stack_isempty(stack))
     return -1;
 
   stack->head--;
@@ -145,10 +145,14 @@ int stack_pop(stack_t * stack, void ** data)
  ***/
 void stack_destroy(stack_t ** stack)
 {
+  if (stack == NULL || *stack == NULL)
+    return;
+
   void * data;
   while (!stack_isempty(*stack)) {
     stack_pop(*stack, &data);
-    (*stack)->destroy(data);
+    if ((*stack)->destroy)
+      (*stack)->destroy(data);
   }
 
   free((*stack)->stack);
