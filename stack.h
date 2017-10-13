@@ -18,7 +18,7 @@
  * TYPE DEFINITIONS
  ***/
 
-typedef struct _Stack_{
+typedef struct {
 
   void (*destroy)(void *);
   int size;
@@ -26,7 +26,7 @@ typedef struct _Stack_{
   int head;
   void ** stack;
 
-} Stack;
+} stack_t;
 
 /*******************************************************************************
  * MACRO DEFINITIONS
@@ -40,11 +40,11 @@ typedef struct _Stack_{
  * API FUNCTION PROTOTYPES
  ***/
 
-extern void stack_init(Stack *, void (*)(void *), int);
-extern int stack_peek(Stack *, void **);
-extern int stack_push(Stack *, void *);
-extern int stack_pop(Stack *, void **);
-extern void stack_dest(Stack *);
+extern void stack_init(stack_t *, void (*)(void *), int);
+extern int stack_peek(stack_t *, void **);
+extern int stack_push(stack_t *, void *);
+extern int stack_pop(stack_t *, void **);
+extern void stack_dest(stack_t *);
 
 #endif /* __ET_STACK_H__ */
 

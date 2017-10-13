@@ -34,7 +34,7 @@ static inline void error_exit(char *);
 int main(int argc, char * argv[])
 {
   int * pNum;
-  Stack * stack = malloc(sizeof(Stack));
+  stack_t * stack = malloc(sizeof(stack_t));
 
   if (stack == NULL)
     error_exit("Could not allocate memory for stack!");

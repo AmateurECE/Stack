@@ -31,7 +31,7 @@
  *
  * DESCRIPTION:	    Initializes the stack to the size specified in 'size.'
  *
- * ARGUMENTS:	    stack: (Stack *) -- the stack to be operated on.
+ * ARGUMENTS:	    stack: (stack_t *) -- the stack to be operated on.
  *		    destroy: (void (*)(void *)) -- pointer to a user-defined
  *			     function that frees memory held within the stack.
  *		    size: int -- the size of the stack.
@@ -40,7 +40,7 @@
  *
  * NOTES:	    O(1)
  ***/
-void stack_init(Stack * stack, void (*destroy)(void * data), int size)
+void stack_init(stack_t * stack, void (*destroy)(void * data), int size)
 {
   stack->destroy = destroy;
   stack->size = 0;
@@ -54,14 +54,14 @@ void stack_init(Stack * stack, void (*destroy)(void * data), int size)
  *
  * DESCRIPTION:	    Returns without removing the top of the stack.
  *
- * ARGUMENTS:	    stack: (Stack *) -- the stack to be operated on.
+ * ARGUMENTS:	    stack: (stack_t *) -- the stack to be operated on.
  *		    pData: (void **) -- destination to place the top element.
  *
  * RETURN:	    int -- 0 on success, -1 otherwise.
  *
  * NOTES:	    O(1)
  ***/
-int stack_peek(Stack * stack, void ** pData)
+int stack_peek(stack_t * stack, void ** pData)
 {
   if (stack_isempty(stack))
     return -1;
@@ -75,14 +75,14 @@ int stack_peek(Stack * stack, void ** pData)
  *
  * DESCRIPTION:	    Pushes data onto the top of the stack.
  *
- * ARGUMENTS:	    stack: (Stack *) -- the stack to be operated on.
+ * ARGUMENTS:	    stack: (stack_t *) -- the stack to be operated on.
  *		    data: (void *) -- data to place on the stack.
  *
  * RETURN:	    int -- 0 on success, -1 otherwise.
  *
  * NOTES:	    O(1)
  ***/
-int stack_push(Stack * stack, void * data)
+int stack_push(stack_t * stack, void * data)
 {
   if (stack_isfull(stack))
     return -1;
@@ -98,14 +98,14 @@ int stack_push(Stack * stack, void * data)
  *
  * DESCRIPTION:	    Pops data from the top of the stack.
  *
- * ARGUMENTS:	    stack: (Stack *) -- the stack to be operated on.
+ * ARGUMENTS:	    stack: (stack_t *) -- the stack to be operated on.
  *		    data: (void **) -- destination for the top of the stack.
  *
  * RETURN:	    int -- 0 on success, -1 otherwise.
  *
  * NOTES:	    O(1)
  ***/
-int stack_pop(Stack * stack, void ** data)
+int stack_pop(stack_t * stack, void ** data)
 {
   if (stack_isempty(stack))
     return -1;
@@ -123,13 +123,13 @@ int stack_pop(Stack * stack, void ** data)
  *		    to 0. If destroy is set to NULL, does not free the memory
  *		    held within the stack.
  *
- * ARGUMENTS:	    stack: (Stack *) -- the stack to be operated on.
+ * ARGUMENTS:	    stack: (stack_t *) -- the stack to be operated on.
  *
  * RETURN:	    void.
  *
  * NOTES:	    O(n)
  ***/
-void stack_dest(Stack * stack)
+void stack_dest(stack_t * stack)
 {
   void * data;
   while (!stack_isempty(stack)) {
@@ -138,7 +138,7 @@ void stack_dest(Stack * stack)
   }
 
   free(stack->stack);
-  memset(stack, 0, sizeof(Stack));
+  memset(stack, 0, sizeof(stack_t));
 }
 
 /******************************************************************************/
