@@ -1,10 +1,14 @@
 ################################################################################
-# NAME: makefile
-# AUTHOR: Ethan D. Twardy
-# DESCRIPTION: makefile for the executable C code contained in stack.c
-# CREATED: 06/07/17
-# LAST EDITED: 06/07/17
-################################################################################
+# NAME:		    makefile
+#
+# AUTHOR:	    Ethan D. Twardy
+#
+# DESCRIPTION:	    Makefile for the 'stack' debugging program.
+#
+# CREATED:	    10/13/2017
+#
+# LAST EDITED:	    10/13/2017
+###
 
 P = stack
 OBJECTS = stack.c
@@ -26,3 +30,5 @@ clean:
 	rm -rf *.c~
 	rm -rf *.h~
 	rm -rf makefile~
+
+################################################################################
