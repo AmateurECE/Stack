@@ -10,25 +10,30 @@
 # LAST EDITED:	    10/13/2017
 ###
 
-P = stack
-OBJECTS = stack.c
-CFLAGS = -Wall -O3
-LDLIBS=
+TOP:=$(PWD)
+CFLAGS = -g -O0 -Wall
 CC=gcc
 
-$(P):
-	$(CC) $(CFLAGS) -o $(P) $(OBJECTS) $(LDLIBS)
+SRCS += stack.c
+SRCS += stack-debug.c
 
-.PHONY: debug clean
+OBJS = $(patsubst %.c,%.o,$(SRCS))
 
-CFLAGS_DEBUG = -g -O0 -Wall -D CONFIG_DEBUG_STACK
+.PHONY: debug clean force
 
-debug:
-	$(CC) $(CFLAGS_DEBUG) -o $(P) $(OBJECTS) $(LDLIBS)
+all: force $(OBJS) stack clean
 
-clean:
-	rm -rf *.c~
-	rm -rf *.h~
-	rm -rf makefile~
+$(OBJS): force
+
+stack: force
+	$(CC) $(CFLAGS) -o stack $(OBJS)
+
+clean: force
+	rm -f $(TOP)/*.c~
+	rm -f $(TOP)/*.h~
+	rm -f $(TOP)/*.o
+	rm -f $(TOP)/Makefile~
+
+force:
 
 ################################################################################
