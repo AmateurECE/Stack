@@ -7,7 +7,7 @@
 #
 # CREATED:	    10/13/2017
 #
-# LAST EDITED:	    10/13/2017
+# LAST EDITED:	    02/12/2018
 ###
 
 TOP:=$(PWD)
@@ -21,7 +21,8 @@ OBJS = $(patsubst %.c,%.o,$(SRCS))
 
 .PHONY: debug clean force
 
-all: force $(OBJS) stack clean
+all: force $(OBJS) stack
+	dsymutil stack
 
 $(OBJS): force
 

@@ -137,27 +137,27 @@ int stack_pop(stack * stack, void ** data)
  *		    to 0. If destroy is set to NULL, does not free the memory
  *		    held within the stack.
  *
- * ARGUMENTS:	    stack: (stack *) -- the stack to be operated on.
+ * ARGUMENTS:	    st: (stack *) -- the stack to be operated on.
  *
  * RETURN:	    void.
  *
  * NOTES:	    O(n)
  ***/
-void stack_destroy(stack ** stack)
+void stack_destroy(stack ** st)
 {
-  if (stack == NULL || *stack == NULL)
+  if (st == NULL || *st == NULL)
     return;
 
   void * data;
-  while (!stack_isempty(*stack)) {
-    stack_pop(*stack, &data);
-    if ((*stack)->destroy)
-      (*stack)->destroy(data);
+  while (!stack_isempty(*st)) {
+    stack_pop(*st, &data);
+    if ((*st)->destroy)
+      (*st)->destroy(data);
   }
 
-  free((*stack)->stack);
-  free(*stack);
-  *stack = NULL;
+  free((*st)->stack);
+  free(*st);
+  *st = NULL;
 }
 
 /******************************************************************************/

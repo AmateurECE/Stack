@@ -70,18 +70,22 @@ int main(int argc, char * argv[])
 ***/
 static int test_create(void)
 {
-  stack * stack = stack_create(10, free); /* Normal allocation */
+  /* Normal allocation */
+  stack * stack = stack_create(10, free);
   if (stack == NULL)
     return 0;
-
   stack_destroy(&stack);
-  stack = stack_create(0, free); /* Size == 0 */
+
+  /* Size == 0 */
+  stack = stack_create(0, free);
   if (stack != NULL)
     return 0;
 
-  stack = stack_create(10, NULL); /* destroy == NULL */
+  /* destroy == NULL */
+  stack = stack_create(10, NULL);
   if (stack == NULL)
     return 0;
+  stack_destroy(&stack);
 
   return 1;
 }
@@ -175,6 +179,8 @@ static int test_push(void)
     return 0;
   if (!stack_push(stack, NULL))
     return 0;
+  free(pNum);
+  stack_destroy(&stack);
 
   return 1;
 }
@@ -224,6 +230,7 @@ static int test_pop(void)
     return 0;
   if (!stack_pop(stack, NULL))
     return 0;
+  stack_destroy(&stack);
 
   return 1;
 }
