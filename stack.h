@@ -8,7 +8,7 @@
  *
  * CREATED:	    04/14/17
  *
- * LAST EDITED:	    06/07/17
+ * LAST EDITED:	    02/12/2018
  ***/
 
 #ifndef __ET_STACK_H__
@@ -26,7 +26,7 @@ typedef struct {
   int head;
   void ** stack;
 
-} stack_t;
+} stack;
 
 /*******************************************************************************
  * MACRO DEFINITIONS
@@ -40,11 +40,11 @@ typedef struct {
  * API FUNCTION PROTOTYPES
  ***/
 
-extern stack_t * stack_create(int, void (*)(void *));
-extern int stack_peek(stack_t *, void **);
-extern int stack_push(stack_t *, void *);
-extern int stack_pop(stack_t *, void **);
-extern void stack_destroy(stack_t **);
+extern stack * stack_create(int, void (*)(void *));
+extern int stack_peek(stack *, void **);
+extern int stack_push(stack *, void *);
+extern int stack_pop(stack *, void **);
+extern void stack_destroy(stack **);
 
 #endif /* __ET_STACK_H__ */
 

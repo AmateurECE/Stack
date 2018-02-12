@@ -9,7 +9,7 @@
  *
  * CREATED:	    05/05/17
  *
- * LAST EDITED:	    06/07/17
+ * LAST EDITED:	    02/12/2018
  ***/
 
 /*******************************************************************************
@@ -29,27 +29,27 @@
 /*******************************************************************************
  * FUNCTION:	    stack_create
  *
- * DESCRIPTION:	    Initializes a stack_t with the given information and returns
+ * DESCRIPTION:	    Initializes a stack with the given information and returns
  *		    a pointer to it.
  *
  * ARGUMENTS:	    size: int -- the size of the stack.
  *		    destroy: (void (*)(void *)) -- pointer to a user-defined
  *			     function that frees memory held within the stack.
  *
- * RETURN:	    stack_t * -- or NULL, if unsuccessful.
+ * RETURN:	    stack * -- or NULL, if unsuccessful.
  *
  * NOTES:	    O(1)
  ***/
-stack_t * stack_create(int size, void (*destroy)(void *))
+stack * stack_create(int size, void (*destroy)(void *))
 {
   if (size == 0)
     return NULL;
 
-  stack_t * stack = malloc(sizeof(stack_t));
-  if (stack == NULL)
+  stack * _stack = malloc(sizeof(stack));
+  if (_stack == NULL)
     return NULL;
 
-  *stack = (stack_t){
+  *_stack = (stack){
     .destroy = destroy,
     .size = 0,
     .capacity = size,
@@ -57,10 +57,10 @@ stack_t * stack_create(int size, void (*destroy)(void *))
     .stack = calloc(size, sizeof(void *))
   };
 
-  if (stack->stack == NULL)
+  if (_stack->stack == NULL)
     return NULL;
 
-  return stack;
+  return _stack;
 }
 
 /*******************************************************************************
@@ -68,14 +68,14 @@ stack_t * stack_create(int size, void (*destroy)(void *))
  *
  * DESCRIPTION:	    Returns without removing the top of the stack.
  *
- * ARGUMENTS:	    stack: (stack_t *) -- the stack to be operated on.
+ * ARGUMENTS:	    stack: (stack *) -- the stack to be operated on.
  *		    pData: (void **) -- destination to place the top element.
  *
  * RETURN:	    int -- 0 on success, -1 otherwise.
  *
  * NOTES:	    O(1)
  ***/
-int stack_peek(stack_t * stack, void ** pData)
+int stack_peek(stack * stack, void ** pData)
 {
   if (stack == NULL || pData == NULL || stack_isempty(stack))
     return -1;
@@ -89,14 +89,14 @@ int stack_peek(stack_t * stack, void ** pData)
  *
  * DESCRIPTION:	    Pushes data onto the top of the stack.
  *
- * ARGUMENTS:	    stack: (stack_t *) -- the stack to be operated on.
+ * ARGUMENTS:	    stack: (stack *) -- the stack to be operated on.
  *		    data: (void *) -- data to place on the stack.
  *
  * RETURN:	    int -- 0 on success, -1 otherwise.
  *
  * NOTES:	    O(1)
  ***/
-int stack_push(stack_t * stack, void * data)
+int stack_push(stack * stack, void * data)
 {
   if (stack == NULL || data == NULL || stack_isfull(stack))
     return -1;
@@ -112,14 +112,14 @@ int stack_push(stack_t * stack, void * data)
  *
  * DESCRIPTION:	    Pops data from the top of the stack.
  *
- * ARGUMENTS:	    stack: (stack_t *) -- the stack to be operated on.
+ * ARGUMENTS:	    stack: (stack *) -- the stack to be operated on.
  *		    data: (void **) -- destination for the top of the stack.
  *
  * RETURN:	    int -- 0 on success, -1 otherwise.
  *
  * NOTES:	    O(1)
  ***/
-int stack_pop(stack_t * stack, void ** data)
+int stack_pop(stack * stack, void ** data)
 {
   if (stack == NULL || data == NULL || stack_isempty(stack))
     return -1;
@@ -137,13 +137,13 @@ int stack_pop(stack_t * stack, void ** data)
  *		    to 0. If destroy is set to NULL, does not free the memory
  *		    held within the stack.
  *
- * ARGUMENTS:	    stack: (stack_t *) -- the stack to be operated on.
+ * ARGUMENTS:	    stack: (stack *) -- the stack to be operated on.
  *
  * RETURN:	    void.
  *
  * NOTES:	    O(n)
  ***/
-void stack_destroy(stack_t ** stack)
+void stack_destroy(stack ** stack)
 {
   if (stack == NULL || *stack == NULL)
     return;

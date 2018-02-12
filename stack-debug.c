@@ -7,7 +7,7 @@
  *
  * CREATED:	    10/13/2017
  *
- * LAST EDITED:	    10/13/2017
+ * LAST EDITED:	    02/12/2018
  ***/
 
 /*******************************************************************************
@@ -70,7 +70,7 @@ int main(int argc, char * argv[])
 ***/
 static int test_create(void)
 {
-  stack_t * stack = stack_create(10, free); /* Normal allocation */
+  stack * stack = stack_create(10, free); /* Normal allocation */
   if (stack == NULL)
     return 0;
 
@@ -99,7 +99,7 @@ static int test_create(void)
  ***/
 static int test_peek(void)
 {
-  stack_t * stack = stack_create(2, NULL);
+  stack * stack = stack_create(2, NULL);
   int num = 1;
   int * pNum = NULL;
 
@@ -143,7 +143,7 @@ static int test_peek(void)
  ***/
 static int test_push(void)
 {
-  stack_t * stack = stack_create(10, free);
+  stack * stack = stack_create(10, free);
   int * pNum;
 
   /* Fill the stack */
@@ -192,7 +192,7 @@ static int test_push(void)
  ***/
 static int test_pop(void)
 {
-  stack_t * stack = stack_create(10, free);
+  stack * stack = stack_create(10, free);
   int * pNum;
 
   /* Fill the stack */
@@ -244,7 +244,7 @@ static int test_pop(void)
 static int test_destroy(void)
 {
   int * pNum;
-  stack_t * stack = stack_create(10, free);
+  stack * stack = stack_create(10, free);
   stack_destroy(&stack);
   if (stack != NULL)
     return 0;
