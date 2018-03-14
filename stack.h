@@ -45,6 +45,7 @@ extern int stack_peek(stack *, void **);
 extern int stack_push(stack *, void *);
 extern int stack_pop(stack *, void **);
 extern void stack_destroy(stack **);
+extern void stack_traverse(stack *, void (*)(void *));
 
 #endif /* __ET_STACK_H__ */
 

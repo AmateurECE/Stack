@@ -160,4 +160,26 @@ void stack_destroy(stack ** st)
   *st = NULL;
 }
 
+/******************************************************************************
+ * FUNCTION:	    stack_traverse
+ *
+ * DESCRIPTION:	    Traverse the stack in `st' and invoke the callback function
+ *		    `func' on each entry in the stack.
+ *
+ * ARGUMENTS:	    st: (stack *) -- the stack to traverse.
+ *		    func: (void (*)(void *)) -- the callback function.
+ *
+ * RETURN:	    void.
+ *
+ * NOTES:	    none.
+ ***/
+void stack_traverse(stack * st, void (*func)(void *))
+{
+  if (stack_size(st) == 0 || func == NULL)
+    return;
+  int i = 0;
+  for (void * e = st->stack[i++]; e != NULL; e = st->stack[i++])
+    func(e);
+}
+
 /*****************************************************************************/
