@@ -1,18 +1,18 @@
-/*******************************************************************************
+/******************************************************************************
  * NAME:	    stack.c
  *
  * AUTHOR:	    Ethan D. Twardy
  *
  * DESCRIPTION:	    Contains source code for an implementation of a stack.
  *		    Follows the typedefs and macros in stack.h. Also contains
- *		    test code for debugging which is compiled with 'make debug.'
+ *		    test code for which can be compiled with 'make debug.'
  *
- * CREATED:	    05/05/17
+ * CREATED:	    05/05/2017
  *
- * LAST EDITED:	    02/12/2018
+ * LAST EDITED:	    03/14/2018
  ***/
 
-/*******************************************************************************
+/******************************************************************************
  * INCLUDES
  ***/
 
@@ -22,11 +22,11 @@
 
 #include "stack.h"
 
-/*******************************************************************************
+/******************************************************************************
  * API FUNCTIONS
  ***/
 
-/*******************************************************************************
+/******************************************************************************
  * FUNCTION:	    stack_create
  *
  * DESCRIPTION:	    Initializes a stack with the given information and returns
@@ -63,7 +63,7 @@ stack * stack_create(int size, void (*destroy)(void *))
   return _stack;
 }
 
-/*******************************************************************************
+/******************************************************************************
  * FUNCTION:	    stack_peek
  *
  * DESCRIPTION:	    Returns without removing the top of the stack.
@@ -84,7 +84,7 @@ int stack_peek(stack * stack, void ** pData)
   return 0;
 }
 
-/*******************************************************************************
+/******************************************************************************
  * FUNCTION:	    stack_push
  *
  * DESCRIPTION:	    Pushes data onto the top of the stack.
@@ -107,7 +107,7 @@ int stack_push(stack * stack, void * data)
   return 0;
 }
 
-/*******************************************************************************
+/******************************************************************************
  * FUNCTION:	    stack_pop
  *
  * DESCRIPTION:	    Pops data from the top of the stack.
@@ -130,7 +130,7 @@ int stack_pop(stack * stack, void ** data)
   return 0;
 }
 
-/*******************************************************************************
+/******************************************************************************
  * FUNCTION:	    stack_destroy
  *
  * DESCRIPTION:	    Removes all data in the stack, and sets all bytes of memory
@@ -160,4 +160,4 @@ void stack_destroy(stack ** st)
   *st = NULL;
 }
 
-/******************************************************************************/
+/*****************************************************************************/
