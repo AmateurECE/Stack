@@ -6,9 +6,9 @@
  * DESCRIPTION:	    Header file for the implementation of a stack. Contains
  *		    API function prototypes and typedefs.
  *
- * CREATED:	    04/14/17
+ * CREATED:	    04/14/2017
  *
- * LAST EDITED:	    03/14/2018
+ * LAST EDITED:	    03/16/2018
  ***/
 
 #ifndef __ET_STACK_H__

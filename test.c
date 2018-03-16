@@ -1,5 +1,5 @@
-/*******************************************************************************
- * NAME:	    stack-debug.c
+/******************************************************************************
+ * NAME:	    test.c
  *
  * AUTHOR:	    Ethan D. Twardy
  *
@@ -7,10 +7,10 @@
  *
  * CREATED:	    10/13/2017
  *
- * LAST EDITED:	    02/12/2018
+ * LAST EDITED:	    03/16/2018
  ***/
 
-/*******************************************************************************
+/******************************************************************************
  * INCLUDES
  ***/
 
@@ -20,13 +20,13 @@
 
 #include "stack.h"
 
-/*******************************************************************************
+/******************************************************************************
  * MACRO DEFINITIONS
  ***/
 
 #define error_exit(...) { fprintf(stderr, __VA_ARGS__); exit(1); }
 
-/*******************************************************************************
+/******************************************************************************
  * LOCAL PROTOTYPES
  ***/
 
@@ -36,7 +36,7 @@ static int test_push(void);
 static int test_pop(void);
 static int test_destroy(void);
 
-/*******************************************************************************
+/******************************************************************************
  * MAIN
  ***/
 
@@ -45,7 +45,8 @@ int main(int argc, char * argv[])
   /* Seed the random number generator */
   srand((unsigned)time(NULL));
 
-  printf("Test Create (stack_create): \t%s\n", test_create() ? "Pass" : "Fail");
+  printf("Test Create (stack_create): \t%s\n",
+	 test_create() ? "Pass" : "Fail");
   printf("Test Peek (stack_peek):\t\t%s\n", test_peek() ? "Pass" : "Fail");
   printf("Test Push (stack_push):\t\t%s\n", test_push() ? "Pass" : "Fail");
   printf("Test Pop (stack_pop):\t\t%s\n", test_pop() ? "Pass" : "Fail");
@@ -53,11 +54,11 @@ int main(int argc, char * argv[])
 	 test_destroy() ? "Pass" : "Fail");
 }
 
-/*******************************************************************************
+/******************************************************************************
  * LOCAL FUNCTIONS
  ***/
 
-/*******************************************************************************
+/******************************************************************************
  * FUNCTION:	    test_create
  *
  * DESCRIPTION:	    This function tests the function test_create.
@@ -90,7 +91,7 @@ static int test_create(void)
   return 1;
 }
 
-/*******************************************************************************
+/******************************************************************************
  * FUNCTION:	    test_peek
  *
  * DESCRIPTION:	    Test the stack_peek function.
@@ -132,7 +133,7 @@ static int test_peek(void)
   return 1;
 }
 
-/*******************************************************************************
+/******************************************************************************
  * FUNCTION:	    test_push
  *
  * DESCRIPTION:	    Tests the stack_push function
@@ -168,7 +169,7 @@ static int test_push(void)
     free(pNum);
   } else { return 0; } /* The stack really should be full */
 
-  if (stack_pop(stack, (void **)&pNum)) /* Remove one--the next test is valid */
+  if (stack_pop(stack, (void **)&pNum)) /* Remove one for the next test */
     return 0;
   free(pNum);
   pNum = malloc(sizeof(int));
@@ -185,7 +186,7 @@ static int test_push(void)
   return 1;
 }
 
-/*******************************************************************************
+/******************************************************************************
  * FUNCTION:	    test_pop
  *
  * DESCRIPTION:	    This function tests the stack_pop function.
@@ -235,7 +236,7 @@ static int test_pop(void)
   return 1;
 }
 
-/*******************************************************************************
+/******************************************************************************
  * FUNCTION:	    test_destroy
  *
  * DESCRIPTION:	    This function tests the stack_destroy function.
@@ -278,4 +279,4 @@ static int test_destroy(void)
   return 1;
 }
 
-/******************************************************************************/
+/*****************************************************************************/
