@@ -7,7 +7,7 @@
  *
  * CREATED:	    10/13/2017
  *
- * LAST EDITED:	    03/16/2018
+ * LAST EDITED:	    07/10/2018
  ***/
 
 /******************************************************************************
@@ -142,9 +142,7 @@ static int test_peek(void)
  *
  * RETURN:	    int -- 1 if the tests pass, 0 otherwise.
  *
- * NOTES:	    TODO: Push on a full stack
- *		    TODO: stack == NULL
- *		    TODO: data == NULL
+ * NOTES:	    none
  ***/
 static int test_push(void)
 {
@@ -245,9 +243,7 @@ static int test_pop(void)
  *
  * RETURN:	    int -- 1 if the tests pass, 0 otherwise.
  *
- * NOTES:	    TODO: Destroy an empty list
- *		    TODO: Destroy a full list
- *		    TODO: Test null inputs.
+ * NOTES:	    none
  ***/
 static int test_destroy(void)
 {
